@@ -21,8 +21,8 @@
 # ``docs/source/global.rst.inc`` file as well.
 VERSION_MAJOR = 0
 VERSION_MINOR = 6
-VERSION_BUILD = 0
+VERSION_BUILD = "0-gevent"
 VERSION_INFO = (VERSION_MAJOR, VERSION_MINOR, VERSION_BUILD)
-VERSION_STRING = "%d.%d.%d" % VERSION_INFO
+VERSION_STRING = "%d.%d.%s" % VERSION_INFO
 
 __version__ = VERSION_INFO

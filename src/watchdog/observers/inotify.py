@@ -531,14 +531,18 @@ if platform.is_linux():
       """
       Reads events from inotify and yields them.
       """
+
+      from gevent import os as gos
+      gos.make_nonblocking(self._inotify_fd)
+
       while True:
         try:
-          event_buffer = os.read(self._inotify_fd, event_buffer_size)
+          event_buffer = gos.nb_read(self._inotify_fd, event_buffer_size)
         except OSError as e:
           if e.errno == errno.EINTR:
             continue
         break
-      
+
       with self._lock:
         event_list = []
         for wd, mask, cookie, name in Inotify._parse_event_buffer(event_buffer):
